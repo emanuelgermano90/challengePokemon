@@ -1,20 +1,33 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
+import Image from 'next/image';
 
-export default function CardProduct({ id, name, types, abilities }) {
+// Componente Card para mostrar los pokemon en la Home
+export default function CardProduct({ id, name, abilities, img }) {
   
+  // traemos el estado del Dark/Light Mode.
   const { state } = useSelector(state => state.bgTheme);
-
+  
   return (
 
     <Link href={`/product/${id}`} >
 
-      <div className={`rounded-lg shadow-lg p-4 m-5 h-24 transition delay-200 hover:cursor-pointer hover:scale-110 hover:-rotate-12 ${state ? 'bg-light-bgCard' : 'bg-dark-bgCard'}`}>
+      <div className={`flex rounded-lg shadow-lg p-2 m-5 h-24 transition delay-200 hover:cursor-pointer hover:scale-110 hover:-rotate-12 ${state ? 'bg-gradient-to-r from-light-bgCardFrom to-light-bgCardTo hover:from-light-bgCardFromHov hover:to-light-bgCardToHov' : 'bg-gradient-to-r from-dark-bgCardFrom to-dark-bgCardTo hover:from-dark-bgCardFromHov hover:to-dark-bgCardToHov'}`}>
 
-        <h2 className="text-2xl font-semibold">{String(name).toLocaleUpperCase()}</h2>
+        <div>
 
-        { abilities?.length > 0 && <p className="text-gray-600 text-lg font-bold">Habilidades: {abilities?.length}</p> }
+          { img && <Image src={img} width={96} height={96} /> }
+
+        </div>
+
+        <div className='flex flex-col justify-around'>        
+        
+          <h2 className={`text-xl font-semibold ${state ? 'text-light-thirdText' : 'text-dark-thirdText'}`}>{String(name).toLocaleUpperCase()}</h2>
+
+          { abilities?.length > 0 && <p className="text-gray-600 text-base font-bold">Habilidades: {abilities?.length}</p> }
+
+        </div>
 
       </div>
 
