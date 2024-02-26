@@ -1,3 +1,6 @@
+
+// Rutas con sus controladores y
+// los de talles para la descripcion de cada llamada con Swagger.
 const express = require('express');
 const router = express.Router();
 const {
